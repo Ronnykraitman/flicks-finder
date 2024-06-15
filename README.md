@@ -1,4 +1,4 @@
-# movie-and-chill
+# flicks-finder-ml
 
 ## Before you start:
 - Make sure you use Python 3.10 or above
