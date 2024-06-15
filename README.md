@@ -11,7 +11,7 @@ init.sh
 ```bash
 python3 app.py
 ```
-Wait a second or two, and go to the adress you see on your screen, usually its: http://127.0.0.1:8000/
+Wait a second or two, and go to the address you see on your screen, usually its: http://127.0.0.1:8000/
 
 ## How it works:
 
