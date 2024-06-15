@@ -4,7 +4,7 @@ import pandas as pd
 from model import get_recommend_movies_based_on_plot
 from playground import numeric_filtering_dict, get_movies_and_att_dict
 
-app = Flask(__name__)
+flick = Flask(__name__)
 
 
 script_dir = os.path.dirname(__file__)
@@ -13,12 +13,12 @@ data: pd.DataFrame = pd.read_csv(relative_path)
 movies, movies_att = get_movies_and_att_dict(data)
 
 
-@app.route("/")
+@flick.route("/")
 def home():
     return render_template("welcome.html")
 
 
-@app.route('/explore', methods=['GET', 'POST'])
+@flick.route('/explore', methods=['GET', 'POST'])
 def redirect_to_explore():
     options_genres = movies_att["genres"]
     options_language = movies_att["language"]
@@ -28,7 +28,7 @@ def redirect_to_explore():
                            options_movie_length=list(numeric_filtering_dict["length"].keys()), options_movie_rating=list(numeric_filtering_dict["rating"].keys()), options_movie_date=list(numeric_filtering_dict["release_date"].keys()))
 
 
-@app.route('/autocomplete', methods=['GET'])
+@flick.route('/autocomplete', methods=['GET'])
 def autocomplete():
     options_title = movies_att["titles"]
     query = request.args.get('query', '').lower()
@@ -36,7 +36,7 @@ def autocomplete():
     return jsonify(matching_options)
 
 
-@app.route('/recommendation', methods=['POST'])
+@flick.route('/recommendation', methods=['POST'])
 def submit_form():
     selected_title = request.form.get('moviesInput')
     selected_genres = request.form.get('genre_selection')
@@ -66,4 +66,4 @@ def submit_form():
 
 
 if __name__ == "__main__":
-    app.run(port=8000)
+    flick.run(port=8000)

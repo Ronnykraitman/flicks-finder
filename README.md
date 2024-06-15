@@ -9,7 +9,7 @@ init.sh
 
 ## Start by simply running
 ```bash
-python3 app.py
+python3 flicks.py
 ```
 Wait a second or two, and go to the address you see on your screen, usually its: http://127.0.0.1:8000/
 
