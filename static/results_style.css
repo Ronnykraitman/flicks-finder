@@ -1,0 +1,39 @@
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('static/recommendation.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font: 25px Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.winner {
+    text-align: center;
+    padding: 50px;
+    color: yellow;
+}
+#winner_title {
+    color: deeppink;
+    font-size: 40px;
+    font-weight: bold
+
+}
+
+.others{
+    color: wheat;
+    position: absolute;
+    right: 10%;
+    top: 30%;
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+}

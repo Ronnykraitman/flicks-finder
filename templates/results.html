@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/static/results_style.css">
+  <title>Image Background Example</title>
+  <style>
+    body {
+      background-image: url('static/recommendation.jpg'); /* Replace with your image path */
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="winner">
+  <h1>The perfect movie match</h1>
+  <span id="winner_title">{{ winner }}</span>
+</div>
+
+
+<div class="others">
+  <h2>Other movies</h2>
+  {% for option in other_movies %}
+  <ul>
+    <li>{{ option }}</li>
+  </ul>
+  {% endfor %}
+</div>
+
+</body>
+</html>

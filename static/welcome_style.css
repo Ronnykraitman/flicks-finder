@@ -1,0 +1,36 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+.button-container {
+    position: relative;
+    z-index: 1;
+}
+.button {
+    padding: 15px 25px;
+    font-size: 22px;
+    color: #fff;
+    background-color: #254336;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.button:hover {
+    background-color: #6B8A7A;
+}

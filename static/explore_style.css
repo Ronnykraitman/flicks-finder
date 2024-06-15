@@ -1,0 +1,301 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background-image: url('/static/theater_curtains.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font: 16px Arial;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#search-box {
+    position: absolute;
+    top: 15%;
+    left: 15%;
+
+}
+#autocomplete_box {
+    width: 300px;
+}
+
+
+input[type=text] {
+    background: crimson;
+    width: 100%;
+    padding: 20px;
+    color: #e9e9e9;
+    border: none;
+    font-size: 20px;
+    border-radius: 15px;
+}
+
+input[type=text]::placeholder {
+    color: #e9e9e9;
+    font-size: 20px;
+    text-align: center;
+}
+
+
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+.autocomplete-items div {
+    padding: 10px;
+    cursor: pointer;
+    background-color: #fff;
+    border-bottom: 1px solid #d4d4d4;
+}
+
+.autocomplete-items div:hover {
+    background-color: crimson;
+}
+
+.autocomplete-active {
+    background-color: crimson !important;
+    color: #ffffff;
+}
+
+
+#filters{
+    position: absolute;
+    width: 55%;
+    height: 60%;
+    top: 28%;
+    left: 0;
+    align-items: center;
+}
+
+#filters h3 {
+    position: absolute;
+    color: whitesmoke;
+    left: 29%;
+
+}
+
+#date_selection {
+    position: absolute;
+    bottom: 10px;
+
+}
+#date_selection h4 {
+    position: absolute;
+    color: whitesmoke;
+    left: 50%;
+    bottom: 20px;
+}
+
+#date_selection input[type="radio"] {
+    align-items: center;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#date_selection label span {
+    font-size: 16px;
+    color: whitesmoke;
+    vertical-align: middle;
+}
+
+#date_selection label {
+    position: relative;
+    left: 25px;
+}
+
+#movie_length_selection {
+    position: absolute;
+    bottom: 120px;
+
+}
+#movie_length_selection h4 {
+    position: absolute;
+    color: whitesmoke;
+    left: 40%;
+    bottom: 30px;
+}
+
+#movie_length_selection input[type="radio"] {
+    align-items: center;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#movie_length_selection label span {
+    font-size: 16px;
+    color: whitesmoke;
+    vertical-align: middle;
+}
+
+#movie_length_selection label {
+    position: relative;
+    left: 25px;
+}
+
+#rating_selection {
+    position: absolute;
+    bottom: 240px;
+
+}
+#rating_selection h4 {
+    position: absolute;
+    color: whitesmoke;
+    left: 55%;
+    bottom: 30px;
+}
+
+#rating_selection input[type="radio"] {
+    align-items: center;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+#rating_selection label span {
+    font-size: 16px;
+    color: whitesmoke;
+    vertical-align: middle;
+}
+
+#rating_selection label {
+    position: relative;
+    left: 25px;
+}
+
+
+#genre_selection {
+    width: 300px;
+    margin: 1em auto;
+    position: absolute;
+    cursor: pointer;
+    left: 5%;
+    top: 10%;
+    z-index: 1;
+}
+
+#lng_selection {
+    width: 300px;
+    margin: 1em auto;
+    position: absolute;
+    cursor: pointer;
+    left: 50%;
+    top: 10%;
+    z-index: 1;
+}
+
+.list-choice input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+}
+
+.list-choice-title {
+    width: 100%;
+    display: block;
+    background: darkred;
+    text-align: center;
+    padding: 0.55em 1em;
+    box-sizing: border-box;
+    color: #fff;
+    text-shadow: 0 1px 0 #cacaca;
+    border-radius: 0.2em;
+}
+.list-choice:hover .list-choice-title {
+    border-radius: 0.2em 0.2em 0 0;
+}
+.list-choice-objects label:nth-last-of-type(1) span {
+    border-radius: 0 0 0.2em 0.2em;
+}
+.list-choice input[type="radio"] + span {
+    color: #fff;
+    background: darkred;
+    padding: 0.55em 1em;
+    display: block;
+    text-align: center;
+    box-sizing: border-box;
+    cursor: pointer;
+    width: 100%;
+}
+.list-choice-objects {
+    position: absolute;
+    top: 0;
+    padding-top: 2.1em;
+    box-sizing: border-box;
+    width: 100%;
+    overflow: hidden;
+    max-height: 0;
+    transition: all 250ms ease;
+}
+.list-choice:hover .list-choice-objects input[type="radio"] + span {
+    position: relative;
+    top: 0;
+    transition: all 250ms ease-in-out;
+}
+.list-choice:hover input[type="radio"] + span:hover {
+    background: crimson;
+}
+.list-choice:hover input[type="radio"]:checked + span:hover {
+    background: #74d68e;
+}
+.list-choice input[type="radio"]:checked + span {
+    background: #74d68e;
+    position: absolute;
+    top: 0em;
+    border-radius: 0.2em;
+}
+.list-choice:hover input[type="radio"]:checked + span {
+    border-radius: 0;
+}
+.list-choice:hover
+.list-choice-objects
+label:nth-last-of-type(1)
+input[type="radio"]:checked
++ span {
+    border-radius: 0 0 0.2em 0.2em;
+}
+
+.list-choice:hover .list-choice-objects {
+    max-height: 540px;
+}
+
+
+#radio_filtering {
+    width: 100%;
+    position: absolute;
+    bottom: 10%;
+    left: 8%;
+}
+
+
+
+#go_button {
+    background-color: crimson;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    font-size: 50px;
+    position: absolute;
+    left: 70%;
+    top: 50%;
+}
+
+#go_button:hover {
+    box-shadow: 0px 0px 50px rgba(255, 113, 113, 0.7);
+}
+

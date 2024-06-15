@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/explore_style.css">
+</head>
+<body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const inputField = document.getElementById('moviesInput');
+        const submitButton = document.getElementById('go_button');
+
+        inputField.addEventListener('input', function() {
+            // Enable the submit button if the input field is not empty
+            submitButton.disabled = inputField.value.trim() === '';
+        });
+    });
+</script>
+
+<form action="/recommendation" method="post" autocomplete="off">
+    <div id="search-box">
+        <div class="autocomplete" id="autocomplete_box">
+            <input id="moviesInput" type="text" name="moviesInput" placeholder="Start by typing a movie name">
+        </div>
+    </div>
+    <br>
+    <div id="filters">
+        <h3>
+            Extra filters for your pleasure:
+        </h3>
+
+        <div class="list-choice" id="genre_selection">
+            <div class="list-choice-title">Genres</div>
+            <div class="list-choice-objects">
+
+                {% for option in options_genres %}
+                <label>
+                    <input type="radio" name="genre_selection" value="{{ option }}"/> <span>{{ option }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="list-choice" id="lng_selection">
+            <div class="list-choice-title">Languages</div>
+            <div class="list-choice-objects">
+
+                {% for option in options_language %}
+                <label>
+                    <input type="radio" name="lng_selection" value="{{ option }}"/> <span>{{ option }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+        <div id="radio_filtering">
+            <div id="rating_selection">
+                <h4>Movie rating</h4>
+                {% for option in options_movie_rating %}
+                <label>
+                    <input type="radio" name="rating_selection" value ="{{ option }}">
+                    <span>{{ option }}</span>
+                </label>
+                {% endfor %}
+            </div>
+
+            <div id="movie_length_selection">
+                <h4>Movie length</h4>
+                {% for option in options_movie_length %}
+                <label>
+                    <input type="radio" name="movie_length_selection" value="{{ option }}">
+                    <span>{{ option }}</span>
+                </label>
+                {% endfor %}
+            </div>
+
+            <div id="date_selection">
+                <h4>Movie release date</h4>
+                {% for option in options_movie_date %}
+                <label>
+                    <input type="radio" name="date_selection" value="{{ option }}">
+                    <span>{{ option }}</span>
+                </label>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <button type="submit" id="go_button" disabled value="GO">GO</button>
+<!--    <input type="submit" value="GO" id="go_button" disabled>-->
+</form>
+
+<script>
+    function autocomplete(inp, arr) {
+
+        var currentFocus;
+        inp.addEventListener("input", function(e) {
+            var a, b, i, val = this.value;
+            closeAllLists();
+            if (!val) { return false;}
+            currentFocus = -1;
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+            this.parentNode.appendChild(a);
+            for (i = 0; i < arr.length; i++) {
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                    b = document.createElement("DIV");
+                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length);
+                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    b.addEventListener("click", function(e) {
+                        inp.value = this.getElementsByTagName("input")[0].value;
+
+                        closeAllLists();
+                    });
+                    a.appendChild(b);
+                }
+            }
+        });
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+
+                currentFocus++;
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                currentFocus--;
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                e.preventDefault();
+                if (currentFocus > -1) {
+                    if (x) x[currentFocus].click();
+                }
+            }
+        });
+        function addActive(x) {
+            if (!x) return false;
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+        function removeActive(x) {
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+        function closeAllLists(elmnt) {
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
+
+    var titleList = {{ options_title | tojson }};
+    autocomplete(document.getElementById("moviesInput"), titleList);
+</script>
+
+</body>
+</html>
